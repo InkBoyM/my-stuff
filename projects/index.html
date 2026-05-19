@@ -13,8 +13,9 @@
   .project { border-top: 1px solid #ccc; padding: 16px 0; }
   .project:last-child { border-bottom: 1px solid #ccc; }
   .project-name { font-weight: bold; margin-bottom: 4px; }
-  .project-name a { color: #111; text-decoration: none; }
-  .project-name a:hover { text-decoration: underline; }
+  .project-name a { color: #111; text-decoration: underline; text-underline-offset: 3px; }
+  .project-name a::after { content: " →"; font-weight: normal; }
+  .project-name a:hover { background: #111; color: #fff; padding: 1px 3px; }
   .desc { line-height: 1.5; color: #333; margin-bottom: 6px; }
   .tag { font-size: 0.85em; color: #666; }
   a { color: #111; }
