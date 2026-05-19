@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: monospace; font-size: 14px; background: #fff; color: #111; padding: 32px; max-width: 680px; }
+  h1 { font-size: 1.1em; font-weight: bold; margin-bottom: 24px; }
+  .notice { border-left: 3px solid #111; padding-left: 10px; margin-bottom: 28px; font-size: 0.95em; line-height: 1.6; }
+  nav a { display: block; margin-bottom: 6px; color: #111; text-decoration: none; }
+  nav a:hover { text-decoration: underline; }
+  a { color: #111; }
+</style>
+
+<style id="dm-style">
+  html.dark body { background: #111; color: #eee; }
+  html.dark a { color: #eee; }
+  html.dark nav a { color: #eee; }
+  html.dark .back { color: #eee; }
+  html.dark .notice { border-left-color: #eee; }
+  html.dark .project { border-top-color: #444; }
+  html.dark .project:last-child { border-bottom-color: #444; }
+  html.dark .project-name a { color: #eee; }
+  html.dark .project-name a:hover { background: #eee; color: #111; }
+  html.dark .desc { color: #bbb; }
+  html.dark .tag { color: #999; }
+  html.dark .org { border-top-color: #444; }
+  html.dark .org:last-child { border-bottom-color: #444; }
+  html.dark .status-box { border-left-color: #eee; }
+  html.dark .btn { border-color: #eee; color: #eee; }
+  html.dark .btn:hover { background: #eee; color: #111; }
+  html.dark .legal { color: #aaa; }
+  html.dark p { color: inherit; }
+  #dm-toggle {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    background: none;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    padding: 5px 7px;
+    cursor: pointer;
+    color: inherit;
+    line-height: 0;
+    opacity: 0.7;
+    z-index: 9999;
+    transition: opacity 0.15s;
+  }
+  #dm-toggle:hover { opacity: 1; }
+</style>
+</head>
+<body>
+  <h1>Projects</h1>
+  <div class="notice">
+    Currently a contributor at <a href="https://labs.ko6lvm.org/about/contributors/#yehonathan-twig">LVM Labs</a>.
+  </div>
+  <nav>
+    <a href="projects/">→ All Projects</a>
+    <a href="projects/involvedwith/">→ Involved With</a>
+    <a href="people/">→ People</a>
+  </nav>
+
+<button id="dm-toggle" aria-label="Toggle dark mode">
+  <svg id="dm-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+  <svg id="dm-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+</button>
+<script>
+  (function() {
+    var html = document.documentElement;
+    var moon = document.getElementById('dm-moon');
+    var sun = document.getElementById('dm-sun');
+    function applyTheme(dark) {
+      if (dark) {
+        html.classList.add('dark');
+        moon.style.display = 'none';
+        sun.style.display = '';
+      } else {
+        html.classList.remove('dark');
+        moon.style.display = '';
+        sun.style.display = 'none';
+      }
+    }
+    var saved = localStorage.getItem('theme');
+    applyTheme(saved === 'dark');
+    document.getElementById('dm-toggle').addEventListener('click', function() {
+      var isDark = html.classList.contains('dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      applyTheme(!isDark);
+    });
+  })();
+</script>
+</body>
+</html>
