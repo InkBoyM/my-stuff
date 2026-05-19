@@ -3,25 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projects</title>
+<title>All Projects</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: monospace; font-size: 14px; background: #fff; color: #111; padding: 32px; max-width: 680px; }
-  h1 { font-size: 1.1em; font-weight: bold; margin-bottom: 24px; }
-  .notice { border-left: 3px solid #111; padding-left: 10px; margin-bottom: 28px; font-size: 0.95em; line-height: 1.6; }
-  nav a { display: block; margin-bottom: 6px; color: #111; text-decoration: none; }
-  nav a:hover { text-decoration: underline; }
+  h1 { font-size: 1.1em; font-weight: bold; margin-bottom: 8px; }
+  .back { display: block; margin-bottom: 24px; color: #111; text-decoration: none; font-size: 0.9em; }
+  .back:hover { text-decoration: underline; }
+  .project { border-top: 1px solid #ccc; padding: 16px 0; }
+  .project:last-child { border-bottom: 1px solid #ccc; }
+  .project-name { font-weight: bold; margin-bottom: 4px; }
+  .project-name a { color: #111; text-decoration: none; }
+  .project-name a:hover { text-decoration: underline; }
+  .desc { line-height: 1.5; color: #333; margin-bottom: 6px; }
+  .tag { font-size: 0.85em; color: #666; }
   a { color: #111; }
 </style>
 </head>
 <body>
-  <h1>Projects</h1>
-  <div class="notice">
-    Currently a contributor at <a href="https://labs.ko6lvm.org/about/contributors/#yehonathan-twig">LVM Labs</a>.
+  <a class="back" href="../">← back</a>
+  <h1>All Projects</h1>
+
+  <div class="project">
+    <div class="project-name"><a href="cordis/">Cordis</a></div>
+    <div class="desc">Frontend-dependent web communications application.</div>
+    <div class="tag">LVMLabs Confidential &mdash; <a href="https://labs.ko6lvm.org/software/cordis/regulations">Regulations →</a></div>
   </div>
-  <nav>
-    <a href="projects/">→ All Projects</a>
-    <a href="projects/involvedwith/">→ Involved With</a>
-  </nav>
+
+  <div class="project">
+    <div class="project-name"><a href="mini-static-browser/">Mini Static Browser</a></div>
+    <div class="desc">A static web proxy (not CORS) you can host anywhere for free, with full web proxy functionality running on Scramjet's WSS.</div>
+    <div class="tag"><a href="https://ksf.inkboym.org">ksf.inkboym.org →</a></div>
+  </div>
 </body>
 </html>
