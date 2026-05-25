@@ -75,10 +75,10 @@
   <h2>Configuration</h2>
 
   <h3>Password &amp; Groq API Key</h3>
-  <p>Open <code>index.js</code> (not the one in the public folder) and find:</p>
-  <pre>const SITE_PASSWORD = "enter_password_here";
-const groq_api      = "enter_api_here";</pre>
-  <p>Replace those values with your custom password and your Groq API key.</p>
+  <p>Set the following environment variables:</p>
+  <pre>const SITE_PASSWORD = process.env.SITE_PASSWORD;
+const groq_api      = process.env.GROQ_API;</pre>
+  <p>If deploying to Koyeb (or any platform), add "SITE_PASSWORD" and "GROQ_API" in your "environment variables" settings</p>
 
   <hr>
 
