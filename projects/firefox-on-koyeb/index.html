@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Firefox on Koyeb</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: monospace; font-size: 14px; background: #fff; color: #111; padding: 32px; max-width: 680px; }
+  h1 { font-size: 1.1em; font-weight: bold; margin-bottom: 6px; }
+  .subtitle { color: #555; margin-bottom: 28px; line-height: 1.5; }
+  .back { display: block; margin-bottom: 24px; color: #111; text-decoration: none; font-size: 0.9em; }
+  .back:hover { text-decoration: underline; }
+  h2 { font-size: 0.95em; font-weight: bold; margin: 24px 0 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+  h3 { font-size: 0.9em; font-weight: bold; margin: 18px 0 8px; }
+  ol { padding-left: 20px; line-height: 1.8; }
+  ol li { margin-bottom: 4px; }
+  p { line-height: 1.6; margin-bottom: 10px; }
+  .note { border-left: 3px solid #111; padding-left: 10px; margin-top: 28px; font-size: 0.95em; line-height: 1.6; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+  th, td { text-align: left; padding: 6px 12px 6px 0; border-bottom: 1px solid #ddd; font-size: 0.95em; }
+  th { font-weight: bold; }
+  code { background: #f4f4f4; padding: 1px 5px; border-radius: 3px; font-family: monospace; }
+  .github-link { display: inline-block; margin-top: 20px; color: #111; text-decoration: underline; text-underline-offset: 3px; }
+  .github-link:hover { background: #111; color: #fff; padding: 1px 3px; text-decoration: none; }
+  hr { border: none; border-top: 1px solid #ddd; margin: 28px 0; }
+  a { color: #111; }
+</style>
+
+<style id="dm-style">
+  html.dark body { background: #111; color: #eee; }
+  html.dark a { color: #eee; }
+  html.dark .back { color: #eee; }
+  html.dark .subtitle { color: #aaa; }
+  html.dark .note { border-left-color: #eee; }
+  html.dark th, html.dark td { border-bottom-color: #333; }
+  html.dark code { background: #222; }
+  html.dark hr { border-top-color: #333; }
+  html.dark .github-link { color: #eee; }
+  html.dark .github-link:hover { background: #eee; color: #111; }
+  #dm-toggle {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    background: none;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    padding: 5px 7px;
+    cursor: pointer;
+    color: inherit;
+    line-height: 0;
+    opacity: 0.7;
+    z-index: 9999;
+    transition: opacity 0.15s;
+  }
+  #dm-toggle:hover { opacity: 1; }
+</style>
+</head>
+<body>
+  <a class="back" href="../">← back</a>
+  <h1>Firefox on Koyeb (via noVNC)</h1>
+  <p class="subtitle">Run Firefox in a full desktop environment, accessible from your browser via noVNC — hosted on Koyeb.</p>
+
+  <a class="github-link" href="https://github.com/InkBoyM/KSF-On-Codespaces" target="_blank" rel="noopener noreferrer">github.com/InkBoyM/KSF-On-Codespaces →</a>
+
+  <h2>Deploy to Koyeb</h2>
+
+  <h3>Step 1 — Push to GitHub</h3>
+  <p>Create a new GitHub repo and push all these files to it.</p>
+
+  <h3>Step 2 — Create a Koyeb service</h3>
+  <ol>
+    <li>Go to <a href="https://app.koyeb.com" target="_blank" rel="noopener noreferrer">app.koyeb.com</a></li>
+    <li>Click <strong>Create Service</strong> → <strong>Web Service</strong></li>
+    <li>Select <strong>GitHub</strong> and choose your repo</li>
+    <li>Under <strong>Builder</strong>, select <strong>Dockerfile</strong></li>
+    <li>Set <strong>Port</strong> to <code>3000</code></li>
+  </ol>
+
+  <h3>Step 3 — Set environment variables</h3>
+  <p>In the Koyeb service settings, add:</p>
+  <table>
+    <thead>
+      <tr><th>Key</th><th>Value</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>PASSWORD</code></td><td>your password</td></tr>
+      <tr><td><code>PUID</code></td><td><code>1000</code></td></tr>
+      <tr><td><code>PGID</code></td><td><code>1000</code></td></tr>
+      <tr><td><code>KASM_URL</code></td><td>your custom domain url (if you don't have one, skip this key)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Step 4 — Deploy</h3>
+  <p>Click <strong>Deploy</strong>. Once it's running, open your Koyeb service URL in a browser — you should see the noVNC desktop with Firefox ready to use.</p>
+
+  <hr>
+
+  <div class="note">
+    <strong>RAM</strong> — Firefox needs ~500MB. Koyeb's free tier gives 512MB which is tight; upgrade to the next tier (2GB) for a smooth experience.
+  </div>
+
+<a href="https://x.com/inkboym" target="_blank" rel="noopener noreferrer" id="x-link" aria-label="X (Twitter)">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+</a>
+
+<style>
+  #x-link {
+    position: fixed;
+    bottom: 18px;
+    left: 18px;
+    color: inherit;
+    opacity: 0.7;
+    line-height: 0;
+    transition: opacity 0.15s;
+    z-index: 9999;
+  }
+  #x-link:hover { opacity: 1; }
+</style>
+
+<button id="dm-toggle" aria-label="Toggle dark mode">
+  <svg id="dm-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+  <svg id="dm-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+</button>
+<script>
+  (function() {
+    var html = document.documentElement;
+    var moon = document.getElementById('dm-moon');
+    var sun = document.getElementById('dm-sun');
+    function applyTheme(dark) {
+      if (dark) {
+        html.classList.add('dark');
+        moon.style.display = 'none';
+        sun.style.display = '';
+      } else {
+        html.classList.remove('dark');
+        moon.style.display = '';
+        sun.style.display = 'none';
+      }
+    }
+    var saved = localStorage.getItem('theme');
+    applyTheme(saved === 'dark');
+    document.getElementById('dm-toggle').addEventListener('click', function() {
+      var isDark = html.classList.contains('dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      applyTheme(!isDark);
+    });
+  })();
+</script>
+</body>
+</html>
