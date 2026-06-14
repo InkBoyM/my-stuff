@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://inkboym.org/</loc><priority>1.0</priority></url>
+  <url><loc>https://inkboym.org/projects/</loc><priority>0.9</priority></url>
+  <url><loc>https://inkboym.org/projects/ksf-web-proxy/</loc><priority>0.8</priority></url>
+  <url><loc>https://inkboym.org/projects/mini-static-browser/</loc><priority>0.8</priority></url>
+  <url><loc>https://inkboym.org/projects/cordis/</loc><priority>0.7</priority></url>
+  <url><loc>https://inkboym.org/projects/involvedwith/</loc><priority>0.6</priority></url>
+  <url><loc>https://inkboym.org/people/</loc><priority>0.6</priority></url>
+</urlset>
