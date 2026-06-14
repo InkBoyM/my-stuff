@@ -3,11 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Welcome</title>
+<title>InkBoyM</title>
+<meta name="description" content="Yehonathan Twig (InkBoyM) — developer and contributor at LVM Labs. Projects include KSF Web Proxy, Mini Static Browser, and Cordis.">
+<meta name="author" content="Yehonathan Twig">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://inkboym.org/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://inkboym.org/">
+<meta property="og:title" content="Yehonathan Twig">
+<meta property="og:description" content="Developer and contributor at LVM Labs. Projects: KSF Web Proxy, Mini Static Browser, and Cordis.">
+<meta property="og:site_name" content="InkBoyM">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Yehonathan Twig",
+  "alternateName": "InkBoyM",
+  "url": "https://inkboym.org",
+  "sameAs": [
+    "https://x.com/inkboym",
+    "https://github.com/InkBoyM"
+  ],
+  "knowsAbout": ["Web Development", "Cybersecurity", "Web Proxies"],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "LVM Labs",
+    "url": "https://labs.ko6lvm.org"
+  }
+}
+</script>
+
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: monospace; font-size: 14px; background: #fff; color: #111; padding: 32px; max-width: 680px; }
-  h1 { font-size: 1.1em; font-weight: bold; margin-bottom: 24px; }
+  body { font-family: monospace; font-size: 14px; background: #fff; color: #111; padding: 32px; max-width: 680px; opacity: 0; animation: fadein 0.18s ease forwards; }
+  @keyframes fadein { to { opacity: 1; } }
+  h1 { font-size: 1.1em; font-weight: bold; margin-bottom: 4px; }
+  .alias { font-size: 0.9em; color: #555; margin-bottom: 24px; }
   .notice { border-left: 3px solid #111; padding-left: 10px; margin-bottom: 28px; font-size: 0.95em; line-height: 1.6; }
   nav a { display: block; margin-bottom: 6px; color: #111; text-decoration: none; }
   nav a:hover { text-decoration: underline; }
@@ -19,6 +53,7 @@
   html.dark a { color: #eee; }
   html.dark nav a { color: #eee; }
   html.dark .back { color: #eee; }
+  html.dark .alias { color: #888; }
   html.dark .notice { border-left-color: #eee; }
   html.dark .project { border-top-color: #444; }
   html.dark .project:last-child { border-bottom-color: #444; }
@@ -34,25 +69,17 @@
   html.dark .legal { color: #aaa; }
   html.dark p { color: inherit; }
   #dm-toggle {
-    position: fixed;
-    top: 18px;
-    right: 18px;
-    background: none;
-    border: 1px solid currentColor;
-    border-radius: 4px;
-    padding: 5px 7px;
-    cursor: pointer;
-    color: inherit;
-    line-height: 0;
-    opacity: 0.7;
-    z-index: 9999;
-    transition: opacity 0.15s;
+    position: fixed; top: 18px; right: 18px;
+    background: none; border: 1px solid currentColor; border-radius: 4px;
+    padding: 5px 7px; cursor: pointer; color: inherit;
+    line-height: 0; opacity: 0.7; z-index: 9999; transition: opacity 0.15s;
   }
   #dm-toggle:hover { opacity: 1; }
 </style>
 </head>
 <body>
-  <h1>Welcome,</h1>
+  <h1>Yehonathan Twig</h1>
+  <div class="alias">aka InkBoyM</div>
   <div class="notice">
     Currently a contributor at <a href="https://labs.ko6lvm.org/about/contributors/#yehonathan-twig">LVM Labs</a>.
   </div>
@@ -67,16 +94,7 @@
 </a>
 
 <style>
-  #x-link {
-    position: fixed;
-    bottom: 18px;
-    left: 18px;
-    color: inherit;
-    opacity: 0.7;
-    line-height: 0;
-    transition: opacity 0.15s;
-    z-index: 9999;
-  }
+  #x-link { position: fixed; bottom: 18px; left: 18px; color: inherit; opacity: 0.7; line-height: 0; transition: opacity 0.15s; z-index: 9999; }
   #x-link:hover { opacity: 1; }
 </style>
 
@@ -86,22 +104,13 @@
 </button>
 <script>
   (function() {
-    var html = document.documentElement;
-    var moon = document.getElementById('dm-moon');
-    var sun = document.getElementById('dm-sun');
+    var html = document.documentElement, moon = document.getElementById('dm-moon'), sun = document.getElementById('dm-sun');
     function applyTheme(dark) {
-      if (dark) {
-        html.classList.add('dark');
-        moon.style.display = 'none';
-        sun.style.display = '';
-      } else {
-        html.classList.remove('dark');
-        moon.style.display = '';
-        sun.style.display = 'none';
-      }
+      html.classList.toggle('dark', dark);
+      moon.style.display = dark ? 'none' : '';
+      sun.style.display = dark ? '' : 'none';
     }
-    var saved = localStorage.getItem('theme');
-    applyTheme(saved === 'dark');
+    applyTheme(localStorage.getItem('theme') === 'dark');
     document.getElementById('dm-toggle').addEventListener('click', function() {
       var isDark = html.classList.contains('dark');
       localStorage.setItem('theme', isDark ? 'light' : 'dark');
