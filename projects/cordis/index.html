@@ -20,6 +20,9 @@
   body { font-family: monospace; font-size: 14px; background: #fff; color: #111; padding: 32px; max-width: 680px; opacity: 0; animation: fadein 0.18s ease forwards; }
   @keyframes fadein { to { opacity: 1; } }
   h1 { font-size: 1.1em; font-weight: bold; margin-bottom: 6px; }
+  h2 { font-size: 1.05em; font-weight: bold; margin: 16px 0 6px; }
+  h3 { font-size: 1em; font-weight: bold; margin: 12px 0 6px; }
+  h4 { font-size: 0.95em; font-weight: bold; margin: 10px 0 6px; }
   .back { display: block; margin-bottom: 24px; color: #111; text-decoration: none; font-size: 0.9em; }
   .back:hover { text-decoration: underline; }
   .meta { color: #444; margin-bottom: 4px; }
@@ -30,6 +33,13 @@
   a:hover { text-decoration: underline; }
   .btn { display: inline-block; border: 1px solid #111; padding: 4px 10px; text-decoration: none; font-size: 0.9em; }
   .btn:hover { background: #111; color: #fff; text-decoration: none; }
+  
+  details { margin-top: 20px; margin-bottom: 20px; border: 1px solid #111; padding: 12px; border-radius: 4px; }
+  summary { cursor: pointer; font-weight: bold; font-size: 1.05em; outline: none; user-select: none; margin-bottom: 8px; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 16px; }
+  th, td { border: 1px solid #111; padding: 6px 10px; text-align: left; }
+  ul { list-style-type: none; margin-bottom: 16px; }
+  ul li { margin-bottom: 4px; }
 </style>
 
 <style id="dm-style">
@@ -40,6 +50,10 @@
   html.dark .status-box { border-left-color: #eee; }
   html.dark .btn { border-color: #eee; color: #eee; }
   html.dark .btn:hover { background: #eee; color: #111; }
+  
+  html.dark details { border-color: #eee; }
+  html.dark th, html.dark td { border-color: #eee; }
+
   #dm-toggle {
     position: fixed; top: 18px; right: 18px;
     background: none; border: 1px solid currentColor; border-radius: 4px;
@@ -62,6 +76,49 @@
   </div>
 
   <p>Cordis is a chatting app meant for students, built by students.</p>
+
+  <details>
+    <summary>Design</summary>
+    <h2>Frontend</h2>
+    To be added
+    <h2>Backend</h2>
+    To be added
+    <h3>API Routes (v1)</h3>
+    To be added
+    <h4>Messages</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Message ID</td><td>int</td></tr>
+        <tr><td>Channel ID</td><td>int</td></tr>
+        <tr><td>Author ID</td><td>int</td></tr>
+        <tr><td>Content</td><td>TBD</td></tr>
+        <tr><td>Attachments</td><td>TBD</td></tr>
+        <tr><td>Embeds</td><td>TBD</td></tr>
+        <tr><td>Created At</td><td>int</td></tr>
+        <tr><td>Modified At</td><td>int</td></tr>
+        <tr><td>Message Type</td><td>str</td></tr>
+        <tr><td>Parent ID</td><td>int</td></tr>
+        <tr><td>Thread ID</td><td>int</td></tr>
+        <tr><td>Mentions</td><td>TBD</td></tr>
+        <tr><td>Flags</td><td>TBD</td></tr>
+        <tr><td>Reactions</td><td>TBD</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Maintainers</h2>
+    <p>Maintained by the KSF Cybersecurity Initiative, a project of LVMLabs, by the following contributors:</p>
+    <ul>
+      <li><a href="https://github.com/ko6lvm" target="_blank">@ko6lvm</a></li>
+      <li><a href="https://github.com/inkboym" target="_blank">@inkboym</a></li>
+      <li><a href="https://github.com/eicv-dev" target="_blank">@eicv-dev</a></li>
+    </ul>
+  </details>
 
 <button id="dm-toggle" aria-label="Toggle dark mode">
   <svg id="dm-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
