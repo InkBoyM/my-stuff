@@ -8,7 +8,7 @@
 <meta name="author" content="Yehonathan Twig">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://inkboym.org/">
-
+  
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://inkboym.org/">
@@ -42,10 +42,33 @@
   @keyframes fadein { to { opacity: 1; } }
   h1 { font-size: 1.1em; font-weight: bold; margin-bottom: 4px; }
   .alias { font-size: 0.9em; color: #555; margin-bottom: 24px; }
-  .notice { border-left: 3px solid #111; padding-left: 10px; margin-bottom: 28px; font-size: 0.95em; line-height: 1.6; }
+  .notice { border-left: 3px solid #111; padding-left: 10px; margin-bottom: 24px; font-size: 0.95em; line-height: 1.6; }
   nav a { display: block; margin-bottom: 6px; color: #111; text-decoration: none; }
   nav a:hover { text-decoration: underline; }
   a { color: #111; }
+
+  .dc-card { position: relative; border: 1px solid #ddd; padding: 14px; margin-bottom: 28px; border-radius: 6px; display: flex; flex-direction: column; gap: 12px; }
+  .dc-user-section { display: flex; align-items: center; gap: 12px; }
+  .dc-avatar-wrapper { position: relative; width: 48px; height: 48px; flex-shrink: 0; }
+  .dc-avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+  
+  .dc-dot { position: absolute; bottom: -2px; left: -2px; width: 14px; height: 14px; border-radius: 50%; border: 2.5px solid #fff; }
+  .dc-devices { position: absolute; top: -4px; right: -4px; background: #fff; border-radius: 50%; padding: 2px; display: flex; align-items: center; justify-content: center; z-index: 2; border: 2.5px solid #fff; }
+  
+  .dc-info { flex: 1; min-width: 0; }
+  .dc-username { font-weight: bold; font-size: 1.05em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dc-status-text { font-size: 0.9em; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+  
+  .dev-wrapper { position: relative; display: flex; align-items: center; justify-content: center; cursor: default; }
+  .dev-badge { position: absolute; top: -10px; right: -8px; font-size: 0.65em; font-weight: bold; background: #f23f43; color: #fff; padding: 2px 4px; border-radius: 10px; border: 2px solid #fff; line-height: 1; pointer-events: none; z-index: 3; }
+  .dev-tooltip { display: none; position: absolute; left: 100%; top: 50%; transform: translateY(-50%); margin-left: 8px; background: #f9f9f9; padding: 4px; border-radius: 4px; gap: 4px; border: 1px solid #ddd; z-index: 10; white-space: nowrap; }
+  .dev-wrapper:hover .dev-tooltip { display: flex; align-items: center; }
+
+  .dc-activity { display: none; padding-top: 12px; border-top: 1px solid #ddd; align-items: center; gap: 12px; }
+  .dc-activity img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+  .dc-activity-info { flex: 1; min-width: 0; }
+  .dc-activity-name { font-weight: bold; font-size: 0.95em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dc-activity-details { font-size: 0.85em; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
 </style>
 
 <style id="dm-style">
@@ -68,6 +91,15 @@
   html.dark .btn:hover { background: #eee; color: #111; }
   html.dark .legal { color: #aaa; }
   html.dark p { color: inherit; }
+
+  html.dark .dc-card { border-color: #333; }
+  html.dark .dc-dot { border-color: #111; }
+  html.dark .dc-devices { background: #111; border-color: #111; }
+  html.dark .dev-badge { border-color: #111; }
+  html.dark .dc-status-text, html.dark .dc-activity-details { color: #999; }
+  html.dark .dev-tooltip { background: #1a1a1a; border-color: #333; }
+  html.dark .dc-activity { border-top-color: #333; }
+
   #dm-toggle {
     position: fixed; top: 18px; right: 18px;
     background: none; border: 1px solid currentColor; border-radius: 4px;
@@ -83,6 +115,23 @@
   <div class="notice">
     Currently a contributor at <a href="https://labs.ko6lvm.org/about/contributors/#yehonathan-twig">LVMLabs</a>.
   </div>
+
+  <div id="discord-widget" class="dc-card" style="display: none;">
+    <div class="dc-user-section">
+      <div class="dc-avatar-wrapper">
+        <img id="dc-pfp" class="dc-avatar" src="" alt="Profile Picture">
+        <div id="dc-dot" class="dc-dot"></div>
+        <div id="dc-devices" class="dc-devices"></div>
+      </div>
+      <div class="dc-info">
+        <div id="dc-username" class="dc-username"></div>
+        <div id="dc-status-text" class="dc-status-text"></div>
+      </div>
+    </div>
+    <div id="dc-activity" class="dc-activity">
+      </div>
+  </div>
+
   <nav>
     <a href="projects/">→ All Projects</a>
     <a href="projects/involvedwith/">→ Involved With</a>
@@ -102,6 +151,7 @@
   <svg id="dm-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
   <svg id="dm-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
 </button>
+
 <script>
   (function() {
     var html = document.documentElement, moon = document.getElementById('dm-moon'), sun = document.getElementById('dm-sun');
@@ -117,6 +167,101 @@
       applyTheme(!isDark);
     });
   })();
+
+  async function fetchDiscordStatus() {
+    try {
+      const res = await fetch("https://api.lanyard.rest/v1/users/906006351191351316");
+      const { data } = await res.json();
+      if (!data) return;
+
+      const colors = { online: '#23a559', idle: '#f0b232', dnd: '#f23f43', offline: '#80848e' };
+      const statusColor = colors[data.discord_status] || colors.offline;
+
+      const ext = data.discord_user.avatar.startsWith('a_') ? 'gif' : 'png';
+      document.getElementById('dc-pfp').src = `https://cdn.discordapp.com/avatars/${data.discord_user.id}/${data.discord_user.avatar}.${ext}?size=128`;
+      document.getElementById('dc-dot').style.backgroundColor = statusColor;
+      document.getElementById('dc-username').textContent = data.discord_user.global_name || data.discord_user.username;
+
+      const customStatus = data.activities.find(a => a.type === 4);
+      let statusText = "No custom status";
+      if (customStatus) {
+        statusText = customStatus.state || "";
+        if (customStatus.emoji) {
+          const emojiStr = customStatus.emoji.id ? `:${customStatus.emoji.name}:` : customStatus.emoji.name;
+          statusText = `${emojiStr} ${statusText}`.trim();
+        }
+      }
+      document.getElementById('dc-status-text').textContent = statusText;
+
+      const devIcons = {
+        desktop: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
+        mobile: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>',
+        web: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>'
+      };
+
+      let activeDevices = [];
+      if (data.active_on_discord_desktop) activeDevices.push(devIcons.desktop);
+      if (data.active_on_discord_mobile) activeDevices.push(devIcons.mobile);
+      if (data.active_on_discord_web) activeDevices.push(devIcons.web);
+
+      const devContainer = document.getElementById('dc-devices');
+      devContainer.style.color = statusColor;
+
+      if (activeDevices.length > 0) {
+        devContainer.style.display = 'flex';
+        let html = `<div class="dev-wrapper">${activeDevices[0]}`;
+        if (activeDevices.length > 1) {
+          html += `<div class="dev-badge">+${activeDevices.length - 1}</div>`;
+          let hoverHtml = `<div class="dev-tooltip">`;
+          for(let i = 1; i < activeDevices.length; i++) hoverHtml += activeDevices[i];
+          hoverHtml += `</div>`;
+          html += hoverHtml;
+        }
+        html += `</div>`;
+        devContainer.innerHTML = html;
+      } else {
+        devContainer.style.display = 'none';
+        devContainer.innerHTML = '';
+      }
+
+      const rp = data.activities.find(a => a.type !== 4);
+      const actContainer = document.getElementById('dc-activity');
+      if (rp) {
+        let imgHtml = '';
+        if (rp.assets && rp.assets.large_image) {
+          let imgUrl = rp.assets.large_image.startsWith('mp:external') 
+            ? `https://media.discordapp.net/external/${rp.assets.large_image.replace('mp:external/','')}` 
+            : `https://cdn.discordapp.com/app-assets/${rp.application_id}/${rp.assets.large_image}.png`;
+          imgHtml = `<img src="${imgUrl}" alt="Activity Icon">`;
+        } else {
+          imgHtml = `<div style="width:48px; height:48px; border-radius:8px; background:currentColor; opacity:0.1; flex-shrink:0;"></div>`;
+        }
+
+        actContainer.innerHTML = `
+          ${imgHtml}
+          <div class="dc-activity-info">
+            <div class="dc-activity-name">${rp.name}</div>
+            ${rp.details ? `<div class="dc-activity-details">${rp.details}</div>` : ''}
+            ${rp.state ? `<div class="dc-activity-details">${rp.state}</div>` : ''}
+          </div>
+        `;
+        actContainer.style.display = 'flex';
+      } else {
+        actContainer.style.display = 'none';
+        actContainer.innerHTML = '';
+      }
+
+      document.getElementById('discord-widget').style.display = 'flex';
+
+    } catch(e) {
+      console.error("Failed to fetch Lanyard data:", e);
+    }
+  }
+
+  fetchDiscordStatus();
+  setInterval(fetchDiscordStatus, 15000);
 </script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"8936f3d6c64c49c5be875cf0d289645a","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
