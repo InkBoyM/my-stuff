@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cordis — Blog</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: monospace; font-size: 14px; background: #fff; color: #111; padding: 32px; max-width: 680px; }
+  h1 { font-size: 1.1em; font-weight: bold; margin-bottom: 4px; }
+  .indicator { font-weight: bold; margin-bottom: 20px; }
+  .back { display: block; margin-bottom: 24px; color: #111; text-decoration: none; font-size: 0.9em; }
+  .back:hover { text-decoration: underline; }
+  p { line-height: 1.6; margin-bottom: 12px; }
+  a { color: #111; }
+  a:hover { text-decoration: underline; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 20px 0; }
+  .section-title { font-weight: bold; margin-bottom: 8px; }
+  .legal { font-size: 0.9em; line-height: 1.65; color: #333; }
+
+  .checklist { list-style: none; margin-bottom: 12px; }
+  .checklist li { line-height: 1.7; }
+  .checklist .un { color: #888; }
+
+  details { margin-bottom: 10px; }
+  summary { cursor: pointer; font-weight: bold; }
+  summary:hover { text-decoration: underline; }
+  details .tag { font-weight: normal; color: #666; }
+  details ul { list-style: none; margin: 10px 0 10px 0; }
+  details li { line-height: 1.6; }
+  details li::before { content: "- "; }
+  .contrib { font-size: 0.9em; color: #333; margin-top: 6px; }
+
+  .links { list-style: none; }
+  .links li { line-height: 1.7; }
+  .links .label { color: #666; }
+  .links .label::after { content: ": "; }
+
+  .end { text-align: left; font-size: 0.9em; color: #333; margin-top: 8px; }
+</style>
+
+<style id="dm-style">
+  html.dark body { background: #111; color: #eee; }
+  html.dark a { color: #eee; }
+  html.dark .back { color: #eee; }
+  html.dark hr { border-top-color: #444; }
+  html.dark .legal { color: #aaa; }
+  html.dark .checklist .un { color: #777; }
+  html.dark details .tag { color: #999; }
+  html.dark .contrib { color: #aaa; }
+  html.dark .links .label { color: #999; }
+  html.dark .end { color: #aaa; }
+  #dm-toggle {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    background: none;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    padding: 5px 7px;
+    cursor: pointer;
+    color: inherit;
+    line-height: 0;
+    opacity: 0.7;
+    z-index: 9999;
+    transition: opacity 0.15s;
+  }
+  #dm-toggle:hover { opacity: 1; }
+</style>
+</head>
+<body>
+  <a class="back" href="../">← back to blog</a>
+  <h1>We have launched a new KSF product: Cordis!</h1>
+
+  <hr>
+
+  <p class="section-title">What is Cordis?</p>
+  <p>If you haven't heard of Cordis, what are you doing?!? Everyone has heard of Cordis, even Mr. President himself:</p>
+
+  <p class="legal">"I do quite like Cordis actually, its good for because it was made in the USA instead of <em>China China China</em>"<br>— Not actually Donald Trump</p>
+
+  <p>Cordis is a chatting app made by ryanthestupid, inkboym, and eicv_ as part of <a href="https://killsecurly.com/">KillSecurly</a> (KSF) &amp; <a href="https://lvmlabs.org/">LVMlabs</a>. It's aiming to be an unblocked chatting app for students to use in school to chat with each other — it has a lot of features like creating servers, DMs, profile customization, and more!</p>
+
+  <p>Cordis is very new (around 2 months old) and we are still adding new features.</p>
+
+  <p>We are heavily inspired by Discord if you couldn't tell by going onto the site.</p>
+
+  <p>Cordis is <a href="https://github.com/ko6lvm/cordis">open source</a> — you can also self host your own version of Cordis for private use!</p>
+
+  <hr>
+
+  <p class="section-title">What features does Cordis have?</p>
+
+  <p class="legal">Messaging</p>
+  <ul class="checklist">
+    <li>☑ Message formatting</li>
+    <li>☑ Edit message</li>
+    <li>☑ Delete message</li>
+    <li>☑ Reply to message</li>
+    <li>☑ Emoji reactions</li>
+    <li>☑ Working pings</li>
+    <li>☑ Highlighted pings</li>
+    <li>☑ Highlighted links</li>
+    <li>☑ Last seen indicator</li>
+  </ul>
+
+  <p class="legal">Embeds &amp; Attachments</p>
+  <ul class="checklist">
+    <li>☑ Rich embeds</li>
+    <li>☑ YouTube rich embeds</li>
+    <li>☑ In-app video embeds</li>
+    <li>☑ Correct attachment handling</li>
+  </ul>
+
+  <p class="legal">Permissions &amp; Roles</p>
+  <ul class="checklist">
+    <li>☑ Administrator (system-level)</li>
+    <li>☑ Moderator (system-level)</li>
+    <li>☑ Admin powers (ban, etc.)</li>
+    <li>☑ Mod powers (mute)</li>
+    <li>☑ Server roles</li>
+    <li>☑ Server permissions</li>
+    <li>☑ Server admin</li>
+  </ul>
+
+  <p class="legal">Server Structure</p>
+  <ul class="checklist">
+    <li>☑ Channel categories</li>
+    <li>☑ Server icons</li>
+    <li>☑ Server banners</li>
+    <li class="un">☐ Join messages</li>
+    <li>☑ Verified servers</li>
+    <li class="un">☐ Verified accounts</li>
+  </ul>
+
+  <p class="legal">User &amp; System</p>
+  <ul class="checklist">
+    <li>☑ Notification sound</li>
+    <li>☑ Profile picture cropping</li>
+    <li class="un">☐ Commands</li>
+  </ul>
+
+  <p class="legal">Appearance</p>
+  <ul class="checklist">
+    <li>☑ Light mode toggle</li>
+  </ul>
+
+  <p>We still have other features on our list but these are the main ones we are focusing on.</p>
+
+  <hr>
+
+  <p class="section-title">Cordis Releases</p>
+  <p>Cordis is currently on version 1.1.</p>
+
+  <details open>
+    <summary>Cordis v1.1 <span class="tag">— Jul 27 2026</span></summary>
+    <p class="legal" style="margin-top:10px;">Changelog</p>
+    <ul>
+      <li>Servers can be verified by system admins</li>
+      <li>Server roles</li>
+      <li>System admins can force username changes (flagged for change on next startup, user gets discretion on the new name)</li>
+      <li>System admins can force display name changes</li>
+      <li>Homepage / login page updates</li>
+      <li>License added (Apache-2.0)</li>
+      <li>Channel access view updates</li>
+      <li>Cropping for profile pictures and banners</li>
+      <li>Fixed websocket broadcasts crashing connections</li>
+      <li>Bug fixes and other quality-of-life improvements</li>
+    </ul>
+    <p class="contrib">Contributors: ko6lvm, eicv-dev</p>
+  </details>
+
+  <details>
+    <summary>Cordis v1 <span class="tag">— Jul 16 2026</span></summary>
+    <p class="legal" style="margin-top:10px;">Features</p>
+    <ul>
+      <li>Full desktop and mobile UI on web</li>
+      <li>Notifications, pings, and unread status</li>
+      <li>Servers (admin roles, channels, categories, etc)</li>
+      <li>Light/dark mode</li>
+      <li>Rich embeds, including platforms like YouTube</li>
+      <li>Rich text formatting</li>
+      <li>Profile customization</li>
+      <li>Message reactions, editing, and deleting</li>
+      <li>Python backend</li>
+      <li>Cloudflare R2-like database/CDN for images</li>
+      <li>PostgreSQL messages and account database</li>
+    </ul>
+    <p class="contrib">Contributors: ko6lvm, InkBoyM, eicv-dev</p>
+  </details>
+
+  <p class="legal">All releases can be found on Github</p>
+
+  <hr>
+
+  <p class="section-title">Extra stuff</p>
+  <ul class="links">
+    <li><span class="label">KSF website</span><a href="https://killsecurly.com">killsecurly.com</a></li>
+    <li><span class="label">LVMLabs website</span><a href="https://lvmlabs.org">lvmlabs.org</a></li>
+    <li><span class="label">My website</span><a href="https://www.inkboym.org/">inkboym.org</a></li>
+    <li><span class="label">Cordis v1.1</span><a href="https://cordis.lvmlabs.org">cordis.lvmlabs.org</a></li>
+    <li><span class="label">Cordis Logo (currently unused)</span><a href="https://transfer.inkboym.org/file/4VnhZGJnlHvD/raw">view file</a></li>
+    <li><span class="label">Cordis Regulations</span><a href="https://labs.ko6lvm.org/software/cordis/regulations">regulations</a></li>
+  </ul>
+
+  <hr>
+
+  <p class="end">End of blog<br>Last updated - 8/6/26 1:49PM</p>
+
+<button id="dm-toggle" aria-label="Toggle dark mode">
+  <svg id="dm-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+  <svg id="dm-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+</button>
+<script>
+  (function() {
+    var html = document.documentElement;
+    var moon = document.getElementById('dm-moon');
+    var sun = document.getElementById('dm-sun');
+    function applyTheme(dark) {
+      if (dark) {
+        html.classList.add('dark');
+        moon.style.display = 'none';
+        sun.style.display = '';
+      } else {
+        html.classList.remove('dark');
+        moon.style.display = '';
+        sun.style.display = 'none';
+      }
+    }
+    var saved = localStorage.getItem('theme');
+    applyTheme(saved === 'dark');
+    document.getElementById('dm-toggle').addEventListener('click', function() {
+      var isDark = html.classList.contains('dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      applyTheme(!isDark);
+    });
+  })();
+</script>
+</body>
+</html>
