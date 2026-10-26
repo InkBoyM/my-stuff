@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Stuff | InkBoyM</title>
+<meta name="description" content="Random stuff by InkBoyM.">
+<meta name="author" content="Yehonathan Twig">
+<link rel="canonical" href="https://inkboym.org/random-stuff/">
+<script>
+  try { if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark'); } catch (e) {}
+</script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: monospace; font-size: 14px; background: #fff; color: #111; padding: 32px; max-width: 680px; opacity: 0; animation: fadein 0.18s ease forwards; }
+  @keyframes fadein { to { opacity: 1; } }
+  h1 { font-size: 1.1em; font-weight: bold; margin-bottom: 4px; }
+  .alias { font-size: 0.9em; color: #555; margin-bottom: 24px; }
+  a { color: #111; }
+  .back { display: inline-block; margin-bottom: 20px; text-decoration: none; }
+  .back:hover, .list a:hover, .open:hover { text-decoration: underline; }
+
+  .folders { display: flex; flex-wrap: wrap; gap: 28px; }
+  .folder { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 96px; text-align: center; text-decoration: none; }
+  .folder svg { width: 64px; height: 64px; }
+  .folder:hover span { text-decoration: underline; }
+  .folder:focus-visible, .back:focus-visible, .list a:focus-visible, .open:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+  .list a { display: block; margin-bottom: 6px; text-decoration: none; }
+  .empty { color: #555; }
+
+  .frame { width: 100%; aspect-ratio: 16 / 9; border: 1px solid #ddd; border-radius: 6px; background: #000; display: block; margin-bottom: 10px; }
+  .open { display: inline-block; text-decoration: none; }
+
+  html.dark body { background: #111; color: #eee; }
+  html.dark a { color: #eee; }
+  html.dark .alias, html.dark .empty { color: #888; }
+  html.dark .frame { border-color: #333; }
+
+  #dm-toggle {
+    position: fixed; top: 18px; right: 18px;
+    background: none; border: 1px solid currentColor; border-radius: 4px;
+    padding: 5px 7px; cursor: pointer; color: inherit;
+    line-height: 0; opacity: 0.7; z-index: 9999; transition: opacity 0.15s;
+  }
+  #dm-toggle:hover { opacity: 1; }
+</style>
+</head>
+<body>
+  <div id="app"></div>
+
+<button id="dm-toggle" aria-label="Toggle dark mode">
+  <svg id="dm-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+  <svg id="dm-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+</button>
+
+<script>
+  var FOLDERS = [
+    {
+      id: 'south-park', name: 'South Park',
+      items: [
+        { title: 'South Park 1', url: 'https://transfer.inkboym.org/file/R5idSLN_Cg-1/raw' },
+        { title: 'South Park 2', url: 'https://transfer.inkboym.org/file/6QrOyJGkV_ql/raw' },
+        { title: 'South Park 3', url: 'https://transfer.inkboym.org/file/itxGTv5RNAam/raw' }
+      ]
+    },
+    { id: 'random-websites', name: 'Random Websites', items: [] },
+    { id: 'other', name: 'Other', items: [] }
+  ];
+
+  // folder svg
+  var FOLDER_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>';
+
+  function el(tag, attrs, text) {
+    var n = document.createElement(tag);
+    for (var k in (attrs || {})) n.setAttribute(k, attrs[k]);
+    if (text) n.textContent = text;
+    return n;
+  }
+
+  function render() {
+    var app = document.getElementById('app');
+    app.textContent = '';
+    var parts = decodeURIComponent(location.hash.slice(1)).split('/');
+    var folder = FOLDERS.filter(function (f) { return f.id === parts[0]; })[0];
+    var item = folder && folder.items[parseInt(parts[1], 10)];
+
+    if (folder && item) {
+      // embed view
+      document.title = item.title + ' | InkBoyM';
+      app.appendChild(el('a', { class: 'back', href: '#' + folder.id }, '← ' + folder.name));
+      app.appendChild(el('h1', {}, item.title));
+      app.appendChild(el('div', { class: 'alias' }, folder.name));
+      app.appendChild(el('iframe', { class: 'frame', src: item.url, title: item.title, allowfullscreen: '', referrerpolicy: 'no-referrer' }));
+      app.appendChild(el('a', { class: 'open', href: item.url, target: '_blank', rel: 'noopener noreferrer' }, '→ open in new tab'));
+    } else if (folder) {
+      // folder view
+      document.title = folder.name + ' | InkBoyM';
+      app.appendChild(el('a', { class: 'back', href: '#' }, '← Random Stuff'));
+      app.appendChild(el('h1', {}, folder.name));
+      app.appendChild(el('div', { class: 'alias' }, folder.items.length ? 'pick one' : ''));
+      if (!folder.items.length) {
+        app.appendChild(el('div', { class: 'empty' }, 'nothing here.. yet'));
+      } else {
+        var list = el('div', { class: 'list' });
+        folder.items.forEach(function (it, i) {
+          list.appendChild(el('a', { href: '#' + folder.id + '/' + i }, '→ ' + it.title));
+        });
+        app.appendChild(list);
+      }
+    } else {
+      // home view
+      document.title = 'Random Stuff | InkBoyM';
+      app.appendChild(el('a', { class: 'back', href: '/' }, '← Home'));
+      app.appendChild(el('h1', {}, 'Random Stuff'));
+      app.appendChild(el('div', { class: 'alias' }, 'pick a folder'));
+      var wrap = el('div', { class: 'folders' });
+      FOLDERS.forEach(function (f) {
+        var a = el('a', { class: 'folder', href: '#' + f.id });
+        a.innerHTML = FOLDER_SVG;
+        a.appendChild(el('span', {}, f.name));
+        wrap.appendChild(a);
+      });
+      app.appendChild(wrap);
+    }
+    window.scrollTo(0, 0);
+  }
+
+  window.addEventListener('hashchange', render);
+  render();
+
+  (function () {
+    var html = document.documentElement, moon = document.getElementById('dm-moon'), sun = document.getElementById('dm-sun');
+    function applyTheme(dark) {
+      html.classList.toggle('dark', dark);
+      moon.style.display = dark ? 'none' : '';
+      sun.style.display = dark ? '' : 'none';
+    }
+    applyTheme(html.classList.contains('dark'));
+    document.getElementById('dm-toggle').addEventListener('click', function () {
+      var isDark = html.classList.contains('dark');
+      try { localStorage.setItem('theme', isDark ? 'light' : 'dark'); } catch (e) {}
+      applyTheme(!isDark);
+    });
+  })();
+</script>
+</body>
+</html>
